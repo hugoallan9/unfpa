@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1448254819633.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "57015DEB",
+    "lastKnownWriteTime" : 80336768,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "ank5drqdan",
+        "caption" : "grupo3",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=grupo3&cache_key=ank5drqdan",
+        "displayedObservations" : 1,
+        "environment" : "",
+        "object" : "grupo3",
+        "totalObservations" : 1,
+        "variables" : 2
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

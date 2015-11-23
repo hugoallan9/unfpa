@@ -126,73 +126,73 @@ names(df02) <- c("x","y")
 
 ############03###########
 grupo1 <- enei4 %>%
-  select(ppa03, p03a01)%>%
-  filter(ppa03>=14, p03a01 == "Si")%>%
+  select(ppa03, p03a01, factor_expansion)%>%
+  filter(ppa03>14, p03a01 == "Si")%>%
   group_by(ppa03)%>%
-  summarise(y = n())%>%
-  filter(ppa03 >=14, ppa03 <=29)%>%
+  summarise(y = sum(factor_expansion) )%>%
+  filter(ppa03 >14, ppa03 <=29)%>%
   summarise( y=sum(y)) %>%
-  summarise(x = "15-29",y = y / (enei4 %>% select(ppa03, p03a01)%>%
-                     filter(ppa03 >=14, ppa03 <=29)%>%
+  summarise(x = "15-29",y = as.numeric( y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
+                     filter(ppa03 >14, ppa03 <=29)%>%
                      na.omit()%>%
-                     nrow()) *100)
+                     count(wt=factor_expansion)) *100))
 
 grupo2 <- enei4 %>%
-  select(ppa03, p03a01)%>%
-  filter(ppa03>=14, p03a01 == "Si")%>%
+  select(ppa03, p03a01, factor_expansion)%>%
+  filter(ppa03>14, p03a01 == "Si")%>%
   group_by(ppa03)%>%
-  summarise(y = n())%>%
-  filter(ppa03 >=30, ppa03 <=54)%>%
+  summarise(y = sum(factor_expansion) )%>%
+  filter(ppa03 >29, ppa03 <=54)%>%
   summarise( y=sum(y)) %>%
-  summarise(x = "30-54",y = y / (enei4 %>% select(ppa03, p03a01)%>%
-                                   filter(ppa03 >=30, ppa03 <=54)%>%
+  summarise(x = "30-54",y = as.numeric(y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
+                                   filter(ppa03 >29, ppa03 <=54)%>%
                                    na.omit()%>%
-                                   nrow()) *100)
+                                   count(wt=factor_expansion)) *100))
   
   
 
 grupo3 <- enei4 %>%
-  select(ppa03, p03a01)%>%
-  filter(ppa03>=14, p03a01 == "Si")%>%
+  select(ppa03, p03a01, factor_expansion)%>%
+  filter(ppa03>14, p03a01 == "Si")%>%
   group_by(ppa03)%>%
-  summarise(y = n())%>%
-  filter(ppa03 >=55)%>%
+  summarise(y = sum(factor_expansion) )%>%
+  filter(ppa03 > 54)%>%
   summarise( y=sum(y)) %>%
-  summarise(x = "Mayor a 54",y = y / (enei4 %>% select(ppa03, p03a01)%>%
-                                   filter(ppa03 >=55)%>%
+  summarise(x = "Mayor a 54",y = as.numeric(y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
+                                   filter(ppa03 >54)%>%
                                    na.omit()%>%
-                                   nrow()) *100)
+                                   count(wt=factor_expansion)) *100))
 
 df03 <- rbind(grupo1,grupo2,grupo3)
 
 ########### 4 #################
 totalXinka <- enei4 %>%
   select(p03a01,ppa06,ppa03)%>%
-  filter(ppa03 >=14,ppa06 == "Xinka") %>%
+  filter(ppa03 >14,ppa06 == "Xinka") %>%
   na.omit()%>%
   nrow()
 
 totalGarifuna <- enei4 %>%
   select(p03a01,ppa06,ppa03)%>%
-  filter(ppa03 >=14,ppa06 == "Garífuna") %>%
+  filter(ppa03 >14,ppa06 == "Garífuna") %>%
   na.omit()%>%
   nrow()
 
 totalLadino <- enei4 %>%
   select(p03a01,ppa06,ppa03)%>%
-  filter(ppa03 >=14,ppa06 == "Ladino") %>%
+  filter(ppa03 >14,ppa06 == "Ladino") %>%
   na.omit()%>%
   nrow()
 
 totalExtranjero <- enei4 %>%
   select(p03a01,ppa06,ppa03)%>%
-  filter(ppa03 >=14,ppa06 == "Extranjero") %>%
+  filter(ppa03 >14,ppa06 == "Extranjero") %>%
   na.omit()%>%
   nrow()
 
 totalMaya <- enei4 %>%
   select(p03a01,ppa06,ppa03)%>%
-  filter(ppa03 >=14,ppa06 == "Maya") %>%
+  filter(ppa03 >14,ppa06 == "Maya") %>%
   na.omit()%>%
   nrow()
 
@@ -201,7 +201,7 @@ x = c(totalXinka, totalGarifuna, totalLadino,totalExtranjero,totalMaya)
 
 df04 <- enei4 %>%
   select(ppa03,ppa06,p03a01)%>%
-  filter(ppa03 >=14, p03a01 == "Si") %>%
+  filter(ppa03 >14, p03a01 == "Si") %>%
   group_by(ppa06)%>%
   summarise(conteo = n()) %>%
   mutate(conteo = conteo/x*100)
@@ -212,70 +212,70 @@ names(df04) <- c("x","y")
 ########### 5 #################
 xinka <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Xinka", p03a01 == "Si") %>%
+  filter(ppa03 >14,ppa06 == "Xinka", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalXinka <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Xinka") %>%
+  filter(ppa03 >14,ppa06 == "Xinka") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
   
 garifuna <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Garífuna", p03a01 == "Si") %>%
+  filter(ppa03 >14,ppa06 == "Garífuna", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalGarifuna <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Garífuna") %>%
+  filter(ppa03 >14,ppa06 == "Garífuna") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 ladino <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Ladino", p03a01 == "Si") %>%
+  filter(ppa03 >14,ppa06 == "Ladino", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalLadino <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Ladino") %>%
+  filter(ppa03 >14,ppa06 == "Ladino") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 extranjero <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Extranjero", p03a01 == "Si") %>%
+  filter(ppa03 >14,ppa06 == "Extranjero", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalExtranjero <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Extranjero") %>%
+  filter(ppa03 >14,ppa06 == "Extranjero") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 maya <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Maya", p03a01 == "Si") %>%
+  filter(ppa03 >14,ppa06 == "Maya", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalMaya <- enei4 %>%
   select(p03a01,ppa06,ppa03, ppa02)%>%
-  filter(ppa03 >=14,ppa06 == "Maya") %>%
+  filter(ppa03 >14,ppa06 == "Maya") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
@@ -293,13 +293,13 @@ names(df05) <- c('x','Hombre','Mujer')
 ########### 6 #################
 totalUrbano <- enei4 %>%
   select(p03a01,area,ppa03)%>%
-  filter(ppa03 >=14, area == "URBANA") %>%
+  filter(ppa03 >14, area == "URBANA") %>%
   na.omit()%>%
   nrow()
 
 totalRural <- enei4 %>%
   select(p03a01,area,ppa03)%>%
-  filter(ppa03 >=14, area == "RURAL") %>%
+  filter(ppa03 >14, area == "RURAL") %>%
   na.omit()%>%
   nrow()
 
@@ -307,7 +307,7 @@ x = c(totalUrbano, totalRural)
 
 df06 <- enei4 %>%
   select(area,ppa03,p03a01)%>%
-  filter(ppa03 >=14, p03a01 == "Si") %>%
+  filter(ppa03 >14, p03a01 == "Si") %>%
   group_by(area)%>%
   summarise(conteo = n()) %>%
   mutate(conteo = conteo/x*100)
@@ -317,28 +317,28 @@ names(df06) <- c("x","y")
 ########### 7 #################
 urbana <- enei  %>%
   select(p03a01,area,ppa03, ppa02)%>%
-  filter(ppa03 >=14,area == "URBANA", p03a01 == "Si") %>%
+  filter(ppa03 >14,area == "URBANA", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalUrbana <- enei4 %>%
   select(p03a01,area,ppa03, ppa02)%>%
-  filter(ppa03 >=14,area == "URBANA") %>%
+  filter(ppa03 >14,area == "URBANA") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 rural <- enei4 %>%
   select(p03a01,area,ppa03, ppa02)%>%
-  filter(ppa03 >=14,area == "RURAL", p03a01 == "Si") %>%
+  filter(ppa03 >14,area == "RURAL", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
 
 totalRural <- enei4 %>%
   select(p03a01,area,ppa03, ppa02)%>%
-  filter(ppa03 >=14,area == "RURAL") %>%
+  filter(ppa03 >14,area == "RURAL") %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(conteo = n())
