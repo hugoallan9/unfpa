@@ -1,0 +1,18 @@
+{
+    "contents" : "########### 2 #################\ntotalHombres <- enei3 %>%\n  select(p03a01,ppa03,ppa02,factor)%>%\n  filter(ppa03 >14,ppa02 == \"Hombre\") %>%\n  na.omit()%>%\n  count(wt=factor)\n\ntotalMujeres <- enei3 %>%\n  select(p03a01,ppa03,ppa02,factor)%>%\n  filter(ppa03 >14,ppa02 == \"Mujer\") %>%\n  na.omit()%>%\n  count(wt=factor)\n\nx = rbind(as.numeric(totalHombres), as.numeric(totalMujeres))\n\ndf02 <- enei3 %>%\n  select(ppa02,ppa03,p03a01,factor)%>%\n  filter(ppa03 >14, p03a01 == \"Si\") %>%\n  group_by(ppa02)%>%\n  summarise(conteo = sum(factor))%>%\n  mutate(conteo = conteo/x*100)\n\n\n\nnames(df02) <- c(\"x\",\"y\")",
+    "created" : 1448251548907.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1630630340",
+    "id" : "8932FBE5",
+    "lastKnownWriteTime" : 1448253063,
+    "path" : "/mnt/datos/GitHub/unfpa/pruebas.R",
+    "project_path" : "pruebas.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

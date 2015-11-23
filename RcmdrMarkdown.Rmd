@@ -1,0 +1,67 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+```{r}
+library(foreign, pos=15)
+```
+
+```{r}
+enei14 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/pesonas2014.sav", 
+  use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+colnames(enei14) <- tolower(colnames(enei14))
+```
+
+```{r}
+enei13 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/personas2013.sav", 
+  use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+colnames(enei13) <- tolower(colnames(enei13))
+```
+
+```{r}
+enei12 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/personas2012.sav", 
+  use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+colnames(enei12) <- tolower(colnames(enei12))
+```
+
+```{r}
+enei11 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/pesonas2011.sav", 
+  use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+colnames(enei11) <- tolower(colnames(enei11))
+```
+
+```{r}
+library(abind, pos=17)
+```
+
+```{r}
+summary(enei11)
+```
+
+```{r}
+sapply(enei11, function(x)(sum(is.na(x)))) # NA counts
+```
+
+```{r}
+library(e1071, pos=18)
+```
+
+```{r}
+numSummary(enei11[,"p03a01"], statistics=c("mean", "sd", "IQR", 
+  "quantiles"), quantiles=c(0,.25,.5,.75,1))
+```
+
+

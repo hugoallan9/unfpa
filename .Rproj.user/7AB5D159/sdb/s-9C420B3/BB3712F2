@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1448248460808.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BB3712F2",
+    "lastKnownWriteTime" : 157,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "6b56fkdsmr",
+        "caption" : "enei2",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=enei2&cache_key=6b56fkdsmr",
+        "displayedObservations" : 17686,
+        "environment" : "",
+        "object" : "enei2",
+        "totalObservations" : 17686,
+        "variables" : 221
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

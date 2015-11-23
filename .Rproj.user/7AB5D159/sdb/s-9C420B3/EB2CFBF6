@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1448248656008.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EB2CFBF6",
+    "lastKnownWriteTime" : 80,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "4tj7wrdv29",
+        "caption" : "enei4",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=enei4&cache_key=4tj7wrdv29",
+        "displayedObservations" : 17307,
+        "environment" : "",
+        "object" : "enei4",
+        "totalObservations" : 17307,
+        "variables" : 246
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
