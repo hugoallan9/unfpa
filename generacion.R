@@ -100,7 +100,7 @@ x = c(x,as.numeric(alfa/total*100))
 
 df01 <- data.frame(makeYears(2014,3),x )
 names(df01) <- c("x","y")
-write.csv(df01, "1_01.csv", row.names = FALSE)
+write.table(sep = ";", df01, "1_01.csv", row.names = FALSE)
 
 ########### 2 #################
 totalHombres <- enei4 %>%
@@ -127,7 +127,7 @@ df02 <- enei4 %>%
 
 
 names(df02) <- c("x","y")
-write.csv(df02, "1_02.csv",row.names = FALSE)
+write.table(sep = ";", df02, "1_02.csv" , row.names = FALSE)
 
 ############03###########
 grupo1 <- enei4 %>%
@@ -169,7 +169,7 @@ grupo3 <- enei4 %>%
                                    count(wt=factor_expansion)) *100))
 
 df03 <- rbind(grupo1,grupo2,grupo3)
-write.csv(df03, "1_03.csv",row.names = FALSE)
+write.table(sep = ";", df03, "1_03.csv",row.names = FALSE)
 ########### 4 #################
 totalXinka <- enei4 %>%
   select(p03a01,ppa06,ppa03, factor_expansion)%>%
@@ -213,7 +213,7 @@ df04 <- enei4 %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
 names(df04) <- c("x","y")
-write.csv(df04, "1_04.csv",row.names = FALSE)
+write.table(sep = ";", df04, "1_04.csv",row.names = FALSE)
 
 ########### 5 #################
 xinka <- enei4 %>%
@@ -295,7 +295,7 @@ f5 <- c('Maya', maya$conteo/totalMaya$conteo * 100)
 
 df05 <- data.frame(rbind(f1,f2,f3,f4,f5)) 
 names(df05) <- c('x','Hombre','Mujer')
-write.csv(df05, "1_05.csv",row.names = FALSE)
+write.table(sep = ";", df05, "1_05.csv",row.names = FALSE)
   
 ########### 6 #################
 totalUrbano <- enei4 %>%
@@ -321,7 +321,7 @@ df06 <- enei4 %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
 names(df06) <- c("x","y")
-write.csv(df06, "1_06.csv",row.names = FALSE)
+write.table(sep = ";", df06, "1_06.csv",row.names = FALSE)
   
 ########### 7 #################
 urbana <- enei4  %>%
@@ -360,7 +360,9 @@ f2 <- c('Rural', rural$conteo/totalRural$conteo * 100)
 
 df07 <- data.frame(rbind(f1,f2)) 
 names(df07) <- c('x','Hombre','Mujer')
-write.csv(df07, "1_07.csv",row.names = FALSE)
+write.table(sep = ";", df07, "1_07.csv",row.names = FALSE)
+
+
 
 
 
