@@ -20,7 +20,7 @@ pet3 <- enei3 %>%
   filter( ppa03 > 14) %>%
   na.omit()%>%
   count(wt=factor)
- 
+
 
 pea3 <- enei3 %>%
   select(pea, factor, ppa03)%>%
@@ -77,14 +77,15 @@ peaAlfabeta <- enei4 %>%
 
 
 temp <- enei4 %>%
-  select(pea, p03a01, factor_expansion, dominio)%>%
-  filter(p03a01 == "Si")%>%
+  select(pea, p03a01, factor_expansion, dominio, ppa03)%>%
+  filter(p03a01 == "Si", ppa03 > 14)%>%
   na.omit()%>%
   group_by(dominio)%>%
   summarise(y = sum(factor_expansion))
 
 temp1 <- enei4 %>%
-  select(pea, p03a01, factor_expansion, dominio)%>%
+  select(pea, p03a01, factor_expansion, dominio, ppa03)%>%
+  filter(ppa03 > 14)%>%
   na.omit()%>%
   group_by(dominio)%>%
   summarise(y = sum(factor_expansion))
@@ -102,4 +103,8 @@ names(dfpea_02) <- c("x","y")
 
 write.table(sep = ";", dfpea_02, "2_02.csv", row.names = FALSE)
 
+
+#####################03#############
+temp <- enei4%>%
+  select(ppa03)
 
