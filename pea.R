@@ -106,5 +106,10 @@ write.table(sep = ";", dfpea_02, "2_02.csv", row.names = FALSE)
 
 #####################03#############
 temp <- enei4%>%
-  select(ppa03)
+  select(ppa03, pea, p03a05a, factor_expansion)%>%
+  filter(ppa03>14,pea ==1) %>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
+
 
