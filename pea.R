@@ -105,11 +105,25 @@ write.table(sep = ";", dfpea_02, "2_02.csv", row.names = FALSE)
 
 
 #####################03#############
-temp <- enei4%>%
+dfpea_03 <- enei4%>%
   select(ppa03, pea, p03a05a, factor_expansion)%>%
-  filter(ppa03>14,pea ==1) %>%
+  filter(ppa03>14,pea ==1 ) %>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
 
+names(dfpea_03) <- c("x", "y")
+write.table(sep = ";", dfpea_03, "2_03.csv", row.names = FALSE)
 
+
+#####################04#############
+dfpea_04 <- enei4%>%
+  select(ppa03, pea, p03a05a, factor_expansion, ppa02)%>%
+  filter(ppa03>14,pea ==1 ) %>%
+  na.omit()%>%
+  group_by(p03a05a, ppa02)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
+
+names(dfpea_04) <- c("x", "y", "z")
+
+write.table(sep = ";", dfpea_04, "2_04.csv", row.names = FALSE)
