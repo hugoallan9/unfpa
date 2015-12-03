@@ -121,15 +121,15 @@ ENC[[3]] <- dfpea_03
 
 
 #####################04#############
-niveles <- levels(enei4$p03a05a)
-levels(enei4$p03a05a) <- c(levels(enei4$p03a05a)[1:6], "Postgrado", "Postgrado")
-temp <- enei4%>%
+niveles <- levels(enei3$p03a05a)
+levels(enei3$p03a05a) <- c(levels(enei3$p03a05a)[1:6], "Postgrado", "Postgrado")
+temp <- enei3%>%
   
-  select(ppa03, pea, p03a05a, factor_expansion, ppa02)%>%
+  select(ppa03, pea, p03a05a, factor, ppa02)%>%
   filter(ppa03>14,pea ==1) %>%
   na.omit()%>%
   group_by(p03a05a, ppa02)%>%
-  summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
+  summarise(y = sum(factor)/as.numeric(pea3)*100)
 
 
 names(temp) <- c("x", "y", "z")
@@ -143,7 +143,7 @@ names(dfpea_04) <- c("x", "Hombre", "Mujer")
 
 write.table(sep = ";", dfpea_04, "2_04.csv", row.names = FALSE)
 ENC[[4]] <- dfpea_04
-levels(enei4$p03a05a) <- niveles
+levels(enei3$p03a05a) <- niveles
 
 
 names(ENC) <- c("12.1", "12.2", "12.3", "12.4")
