@@ -138,9 +138,9 @@ grupo1 <- enei4 %>%
   filter(ppa03 >14, ppa03 <=29)%>%
   summarise( y=sum(y)) %>%
   summarise(x = "15-29",y = as.numeric( y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
-                     filter(ppa03 >14, ppa03 <=29)%>%
-                     na.omit()%>%
-                     count(wt=factor_expansion)) *100))
+                                               filter(ppa03 >14, ppa03 <=29)%>%
+                                               na.omit()%>%
+                                               count(wt=factor_expansion)) *100))
 
 grupo2 <- enei4 %>%
   select(ppa03, p03a01, factor_expansion)%>%
@@ -150,11 +150,11 @@ grupo2 <- enei4 %>%
   filter(ppa03 >29, ppa03 <=54)%>%
   summarise( y=sum(y)) %>%
   summarise(x = "30-54",y = as.numeric(y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
-                                   filter(ppa03 >29, ppa03 <=54)%>%
-                                   na.omit()%>%
-                                   count(wt=factor_expansion)) *100))
-  
-  
+                                              filter(ppa03 >29, ppa03 <=54)%>%
+                                              na.omit()%>%
+                                              count(wt=factor_expansion)) *100))
+
+
 
 grupo3 <- enei4 %>%
   select(ppa03, p03a01, factor_expansion)%>%
@@ -164,57 +164,58 @@ grupo3 <- enei4 %>%
   filter(ppa03 > 54)%>%
   summarise( y=sum(y)) %>%
   summarise(x = "Mayor a 54",y = as.numeric(y / (enei4 %>% select(ppa03, p03a01, factor_expansion)%>%
-                                   filter(ppa03 >54)%>%
-                                   na.omit()%>%
-                                   count(wt=factor_expansion)) *100))
+                                                   filter(ppa03 >54)%>%
+                                                   na.omit()%>%
+                                                   count(wt=factor_expansion)) *100))
 
 df03 <- rbind(grupo1,grupo2,grupo3)
 write.table(sep = ";", df03, "1_03.csv",row.names = FALSE)
+
 ########### 4 (Se puede hacer mas fácil la consulta) #################
-totalXinka <- enei4 %>%
-  select(p03a01,ppa06,ppa03, factor_expansion)%>%
+totalXinka <- enei3 %>%
+  select(p03a01,ppa06,ppa03, factor)%>%
   filter(ppa03 >14,ppa06 == "Xinka") %>%
   na.omit()%>%
-  count(wt = factor_expansion)
+  count(wt = factor)
 
-totalGarifuna <- enei4 %>%
-  select(p03a01,ppa06,ppa03, factor_expansion)%>%
+totalGarifuna <- enei3 %>%
+  select(p03a01,ppa06,ppa03, factor)%>%
   filter(ppa03 >14,ppa06 == "Garífuna") %>%
   na.omit()%>%
-  count(wt = factor_expansion)
+  count(wt = factor)
 
-totalLadino <- enei4 %>%
-  select(p03a01,ppa06,ppa03, factor_expansion)%>%
+totalLadino <- enei3 %>%
+  select(p03a01,ppa06,ppa03, factor)%>%
   filter(ppa03 >14,ppa06 == "Ladino") %>%
   na.omit()%>%
-  count(wt = factor_expansion)
+  count(wt = factor)
 
-totalExtranjero <- enei4 %>%
-  select(p03a01,ppa06,ppa03, factor_expansion)%>%
+totalExtranjero <- enei3 %>%
+  select(p03a01,ppa06,ppa03, factor)%>%
   filter(ppa03 >14,ppa06 == "Extranjero") %>%
   na.omit()%>%
-  count(wt = factor_expansion)
+  count(wt = factor)
 
-totalMaya <- enei4 %>%
-  select(p03a01,ppa06,ppa03, factor_expansion)%>%
+totalMaya <- enei3 %>%
+  select(p03a01,ppa06,ppa03, factor)%>%
   filter(ppa03 >14,ppa06 == "Maya") %>%
   na.omit()%>%
-  count(wt = factor_expansion)
+  count(wt = factor)
 
 indigena <- sum(totalMaya$n, totalGarifuna$n, totalXinka$n)
 noIndigena <- sum(totalLadino$n,totalExtranjero$n)
-                                                          
-  
-x = c(indigena, noIndigena)
-niveles <- levels(enei4$ppa06)
-levels(enei4$ppa06) <- c("Indígena", "Indígena", "No indígena","No indígena","Indígena" )
 
-df04 <- enei4 %>%
-  select(ppa03,ppa06,p03a01, factor_expansion)%>%
+
+x = c(indigena, noIndigena)
+niveles <- levels(enei3$ppa06)
+levels(enei3$ppa06) <- c("Indígena", "Indígena", "No indígena","No indígena","Indígena" )
+
+df04 <- enei3 %>%
+  select(ppa03,ppa06,p03a01, factor)%>%
   filter(ppa03 >14, p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa06)%>%
-  summarise(conteo = sum(factor_expansion)) %>%
+  summarise(conteo = sum(factor)) %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
 names(df04) <- c("x","y")
@@ -223,33 +224,33 @@ write.table(sep = ";", df04, "1_04.csv",row.names = FALSE)
 
 
 ########### 5 #################
-indigena <- enei4 %>%
-  select(p03a01,ppa06,ppa03, ppa02,factor_expansion)%>%
+indigena <- enei3 %>%
+  select(p03a01,ppa06,ppa03, ppa02,factor)%>%
   filter(ppa03 >14,ppa06 == "Indígena", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
-  summarise(conteo = sum(factor_expansion))
+  summarise(conteo = sum(factor))
 
-totalIndigena <- enei4 %>%
-  select(p03a01,ppa06,ppa03, ppa02, factor_expansion)%>%
+totalIndigena <- enei3 %>%
+  select(p03a01,ppa06,ppa03, ppa02, factor)%>%
   filter(ppa03 >14,ppa06 == "Indígena") %>%
   na.omit()%>%
   group_by(ppa02)%>%
-  summarise(conteo = sum(factor_expansion))
-  
-noIndigena <- enei4 %>%
-  select(p03a01,ppa06,ppa03, ppa02, factor_expansion)%>%
+  summarise(conteo = sum(factor))
+
+noIndigena <- enei3 %>%
+  select(p03a01,ppa06,ppa03, ppa02, factor)%>%
   filter(ppa03 >14,ppa06 == "No indígena", p03a01 == "Si") %>%
   na.omit()%>%
   group_by(ppa02)%>%
-  summarise(conteo = sum(factor_expansion))
+  summarise(conteo = sum(factor))
 
-totalNoIndigena <- enei4 %>%
-  select(p03a01,ppa06,ppa03, ppa02, factor_expansion)%>%
+totalNoIndigena <- enei3 %>%
+  select(p03a01,ppa06,ppa03, ppa02, factor)%>%
   filter(ppa03 >14,ppa06 == "No indígena") %>%
   na.omit()%>%
   group_by(ppa02)%>%
-  summarise(conteo = sum(factor_expansion))
+  summarise(conteo = sum(factor))
 
 
 
@@ -259,7 +260,7 @@ f2 <- c('No indígena', noIndigena$conteo/totalNoIndigena$conteo * 100)
 df05 <- data.frame(rbind(f1,f2)) 
 names(df05) <- c('x','Hombre','Mujer')
 write.table(sep = ";", df05, "1_05.csv",row.names = FALSE)
-  
+
 ########### 6 #################
 totalUrbano <- enei4 %>%
   select(p03a01,area,ppa03, factor_expansion)%>%
@@ -284,9 +285,8 @@ df06 <- enei4 %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
 names(df06) <- c("x","y")
-df06$x <- c("Urbano", "Rural")
 write.table(sep = ";", df06, "1_06.csv",row.names = FALSE)
-  
+
 ########### 7 #################
 urbana <- enei4  %>%
   select(p03a01,area,ppa03, ppa02, factor_expansion)%>%
