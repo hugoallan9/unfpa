@@ -201,8 +201,8 @@ totalMaya <- enei4 %>%
   na.omit()%>%
   count(wt = factor_expansion)
 
-indigena <- sum(totalMaya$conteo, totalGarifuna$conteo, totalXinka$conteo)
-noIndigena <- sum(totalLadino$conteo,totalExtranjero$conteo)
+indigena <- sum(totalMaya$n, totalGarifuna$n, totalXinka$n)
+noIndigena <- sum(totalLadino$n,totalExtranjero$n)
                                                           
   
 x = c(indigena, noIndigena)
