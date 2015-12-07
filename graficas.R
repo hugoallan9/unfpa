@@ -20,8 +20,8 @@ g<- graficaCol(ENC$"1_04",ordenar = FALSE)
 g <- etiquetasHorizontales(g)
 exportarLatex("graficas/pet/1_04.tex", g)
 
-g<- graficaColCategorias(ENC$"1_05",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,
-                          ruta = "graficas/pea/1_05.tex", procesar = F)
+g<- graficaColCategorias(ENC$"1_05",etiquetas = "h", ancho=0.65,
+                          ruta = "graficas/pea/1_05.tex")
 
 
 g<- graficaCol(ENC$"1_06",ordenar = FALSE)
@@ -31,7 +31,7 @@ exportarLatex("graficas/pet/1_06.tex", g)
 
 
 g<- graficaColCategorias(ENC$"1_07",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,
-                         ruta = "graficas/pea/1_07.tex", procesar = F)
+                         ruta = "graficas/pea/1_07.tex")
 
 
 
@@ -52,7 +52,7 @@ exportarLatex("graficas/pea/1_03.tex", g3)
 
 
 g4<- graficaColCategorias(ENC$"2_04",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,
-                          ruta = "graficas/pea/1_04.tex", procesar = F)
+                          ruta = "graficas/pea/1_04.tex")
 
 
 g5<- graficaColCategorias(ENC$"2_05",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,

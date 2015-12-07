@@ -1,0 +1,104 @@
+% Created by tikzDevice version 0.9 on 2015-12-07 11:40:21
+% !TEX encoding = UTF-8 Unicode
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (289.08,198.74);
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+
+\path[] (  0.00,  0.00) rectangle (289.08,198.74);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+
+\path[] (  7.11, 20.62) rectangle (289.08,172.85);
+
+\path[] ( 84.01, 20.62) --
+	( 84.01,172.85);
+
+\path[] (212.18, 20.62) --
+	(212.18,172.85);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{0,0,255}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] ( 34.35, 20.62) rectangle ( 76.00,172.85);
+\definecolor{drawColor}{RGB}{157,187,255}
+\definecolor{fillColor}{RGB}{157,187,255}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] ( 92.02, 20.62) rectangle (133.68,159.77);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{0,0,255}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] (162.52, 20.62) rectangle (204.17,149.16);
+\definecolor{drawColor}{RGB}{157,187,255}
+\definecolor{fillColor}{RGB}{157,187,255}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] (220.19, 20.62) rectangle (261.84,127.13);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.6pt,line join=round] (  7.11, 20.62) -- (289.08, 20.62);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.82] at ( 55.18,176.07) {93.7};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.82] at (112.85,162.99) {85.7};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.82] at (183.34,152.38) {79.1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.82] at (241.02,130.36) {65.6};
+
+\path[] (  7.11, 20.62) rectangle (289.08,172.85);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+
+\path[] (  7.11, 20.62) --
+	(  7.11,172.85);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+
+\path[] (  7.11, 20.62) --
+	(289.08, 20.62);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+
+\path[] ( 84.01, 16.35) --
+	( 84.01, 20.62);
+
+\path[] (212.18, 16.35) --
+	(212.18, 20.62);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at ( 84.01,  5.69) {Urbano};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at (212.18,  5.69) {Rural};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (289.08,198.74);
+\coordinate (apoyo) at (55.98,189.21);
+\coordinate (longitudFicticia) at (7.11,9.53);
+\coordinate (longitud) at (7.11,7.11);
+\coordinate (desX) at (142.21,0);
+\coordinate (desY) at (0,1.21);
+\definecolor[named]{ct1}{HTML}{
+0000FF
+}
+\definecolor[named]{ct2}{HTML}{
+9DBBFF
+}
+\definecolor[named]{ctb1}{HTML}{
+0000FF
+}
+\definecolor[named]{ctb2}{HTML}{
+9DBBFF
+}
+\path [fill=none] (apoyo) rectangle ($(apoyo)+(longitudFicticia)$)
+node [xshift=0.3cm,inner sep=0pt, outer sep=0pt,midway,right,scale = 0.9]{Hombre};
+\draw [color = ctb1,fill=ct1] ( $(apoyo)  + (desY) $) rectangle ($(apoyo)+ (desY) +(longitud)$);
+\path [fill=none] ($(apoyo)+(desX)$) rectangle ($(apoyo)+(desX)+(longitudFicticia)$)
+node [xshift=0.3cm,inner sep=0pt, outer sep=0pt,midway,right,scale = 0.9]{Mujer};
+\draw [color = ctb2 ,fill=ct2] ( $(apoyo)  + (desY) + (desX) $) rectangle ($(apoyo)+ (desY)+ (desX) +(longitud)$);
+\end{scope}
