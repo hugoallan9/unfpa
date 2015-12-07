@@ -172,43 +172,28 @@ df03 <- rbind(grupo1,grupo2,grupo3)
 write.table(sep = ";", df03, "1_03.csv",row.names = FALSE)
 
 ########### 4 (Se puede hacer mas fácil la consulta) #################
-totalXinka <- enei3 %>%
+niveles <- levels(enei3$ppa06)
+levels(enei3$ppa06) <- c("Indígena", "Indígena", "No indígena","No indígena","Indígena" )
+
+totalIndigena <- enei3 %>%
   select(p03a01,ppa06,ppa03, factor)%>%
-  filter(ppa03 >14,ppa06 == "Xinka") %>%
+  filter(ppa03 >14,ppa06 == "Indígena") %>%
   na.omit()%>%
   count(wt = factor)
 
-totalGarifuna <- enei3 %>%
+totalNoIndigena <- enei3 %>%
   select(p03a01,ppa06,ppa03, factor)%>%
-  filter(ppa03 >14,ppa06 == "Garífuna") %>%
+  filter(ppa03 >14,ppa06 == "No indígena") %>%
   na.omit()%>%
   count(wt = factor)
 
-totalLadino <- enei3 %>%
-  select(p03a01,ppa06,ppa03, factor)%>%
-  filter(ppa03 >14,ppa06 == "Ladino") %>%
-  na.omit()%>%
-  count(wt = factor)
 
-totalExtranjero <- enei3 %>%
-  select(p03a01,ppa06,ppa03, factor)%>%
-  filter(ppa03 >14,ppa06 == "Extranjero") %>%
-  na.omit()%>%
-  count(wt = factor)
 
-totalMaya <- enei3 %>%
-  select(p03a01,ppa06,ppa03, factor)%>%
-  filter(ppa03 >14,ppa06 == "Maya") %>%
-  na.omit()%>%
-  count(wt = factor)
-
-indigena <- sum(totalMaya$n, totalGarifuna$n, totalXinka$n)
-noIndigena <- sum(totalLadino$n,totalExtranjero$n)
+indigena <- as.numeric(totalIndigena)
+noIndigena <- as.numeric(totalNoIndigena)
 
 
 x = c(indigena, noIndigena)
-niveles <- levels(enei3$ppa06)
-levels(enei3$ppa06) <- c("Indígena", "Indígena", "No indígena","No indígena","Indígena" )
 
 df04 <- enei3 %>%
   select(ppa03,ppa06,p03a01, factor)%>%

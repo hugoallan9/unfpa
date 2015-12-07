@@ -64,7 +64,7 @@ x = c(as.numeric(pea1/pet1*100),x)
 
 dfpea_01 <- data.frame(makeYears(2014,3),x )
 names(dfpea_01) <- c("x","y")
-write.table(sep = ";", dfpea_01, "2_01.csv", row.names = FALSE)
+write.table(sep = ";", quote = F,  dfpea_01, "2_01.csv", row.names = FALSE)
 ENC[[1]] <- dfpea_01
 
 
@@ -102,7 +102,7 @@ dfpea_02 <- temp
 
 names(dfpea_02) <- c("x","y")
 
-write.table(sep = ";", dfpea_02, "2_02.csv", row.names = FALSE)
+write.table(sep = ";", quote = F,  dfpea_02, "2_02.csv", row.names = FALSE)
 ENC[[2]] <- dfpea_02
 
 
@@ -116,7 +116,7 @@ dfpea_03 <- enei4%>%
   summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
 
 names(dfpea_03) <- c("x", "y")
-write.table(sep = ";", dfpea_03, "2_03.csv", row.names = FALSE)
+write.table(sep = ";", quote = F,  dfpea_03, "2_03.csv", row.names = FALSE)
 ENC[[3]] <- dfpea_03
 
 
@@ -152,16 +152,12 @@ tempMujer <- enei4%>%
 
 
 
-names(temp) <- c("x", "y", "z")
 
-x <- levels(temp$x)
-y <- temp[c(1,3,5,7,9,11,13),c('z')]
-z <- temp[c(2,4,6,8,10,12,14),c('z')]
 
-dfpea_04 <- cbind(x,y,z)
+dfpea_04 <- data.frame(tempHombre$p03a05a,tempHombre$y,tempMujer$y)
 names(dfpea_04) <- c("x", "Hombre", "Mujer")
 
-write.table(sep = ";", dfpea_04, "2_04.csv", row.names = FALSE)
+write.table(sep = ";", quote = F,  dfpea_04, "2_04.csv", row.names = FALSE)
 ENC[[4]] <- dfpea_04
 levels(enei4$p03a05a) <- niveles
 
