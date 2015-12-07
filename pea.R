@@ -162,9 +162,54 @@ ENC[[4]] <- dfpea_04
 levels(enei4$p03a05a) <- niveles
 
 
-names(ENC) <- c("12.1", "12.2", "12.3", "12.4")
+#####################05#############
+peaIndigena <- enei4 %>%
+  select(pea, factor_expansion, ppa03, ppa06)%>%
+  filter(pea == 1, ppa03 > 14, ppa06 == "Indígena")%>%
+  na.omit()%>%
+  count(wt=factor_expansion)
+
+peaNoIndigena <- enei4 %>%
+  select(pea, factor_expansion, ppa03, ppa06)%>%
+  filter(pea == 1, ppa03 > 14, ppa06 == "No indígena")%>%
+  na.omit()%>%
+  count(wt=factor_expansion)
+
+niveles <- levels(enei4$p03a05a)
+levels(enei4$p03a05a) <- c(levels(enei4$p03a05a)[1:6], "Postgrado", "Postgrado")
+
+tempIndigena <- enei4%>%
+  select(ppa03, pea, p03a05a, factor_expansion, ppa06)%>%
+  filter(ppa03>14,pea ==1, ppa06 == "Indígena") %>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(peaIndigena)*100)
+
+tempNoIndigena <- enei4%>%
+  select(ppa03, pea, p03a05a, factor_expansion, ppa06)%>%
+  filter(ppa03>14,pea ==1, ppa06 == "No indígena") %>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(peaNoIndigena)*100)
 
 
+
+
+
+dfpea_05 <- data.frame(tempNoIndigena$p03a05a,tempNoIndigena$y,tempIndigena$y)
+names(dfpea_05) <- c("x", "No indígena", "Indígena")
+
+write.table(sep = ";", quote = F,  dfpea_05, "2_05.csv", row.names = FALSE)
+levels(enei4$p03a05a) <- niveles
+
+
+######################06##########################
+peaPlantel <- enei4 %>%
+  select(pea, factor_expansion, ppa03, p03a02)%>%
+  filter(pea == 1, ppa03 > 14)%>%
+  na.omit()%>%
+  group_by(p03a02)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
 
 
 
