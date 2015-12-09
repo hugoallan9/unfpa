@@ -124,9 +124,13 @@ df02 <- enei4 %>%
   summarise(conteo = sum(factor_expansion))%>%
   mutate(conteo = conteo/x*100)
 
+nacional <- c("Nacional", as.numeric(alfa/total*100))
 
+df02 <- data.frame(rbind(nacional, df02))
 
 names(df02) <- c("x","y")
+
+df02$x <- c("Nacional", "Hombre", "Mujer")
 write.table(sep = ";", quote = F , df02, "1_02.csv" , row.names = FALSE)
 
 ############03###########
@@ -168,7 +172,7 @@ grupo3 <- enei4 %>%
                                    na.omit()%>%
                                    count(wt=factor_expansion)) *100))
 
-df03 <- rbind(grupo1,grupo2,grupo3)
+df03 <- rbind(nacional, grupo1,grupo2,grupo3)
 write.table(sep = ";", quote = F , df03, "1_03.csv",row.names = FALSE)
 ########### 4 (Se puede hacer mas fácil la consulta) #################
 niveles <- levels(enei4$ppa06)
@@ -202,7 +206,16 @@ df04 <- enei4 %>%
   summarise(conteo = sum(factor_expansion)) %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
+nacional <- c("Nacional", as.numeric(alfa/total*100))
+
+df04 <- data.frame(rbind(nacional, df04))
+
+
+
+
 names(df04) <- c("x","y")
+df04$x <- c("Nacional", "Indígena", "No indígena")
+
 write.table(sep = ";", quote = F , df04, "1_04.csv",row.names = FALSE)
 
 
@@ -268,8 +281,10 @@ df06 <- enei4 %>%
   summarise(conteo = sum(factor_expansion) ) %>%
   mutate(conteo = conteo/as.numeric(x)*100)
 
+df06 <- data.frame(rbind(nacional,df06))
+
 names(df06) <- c("x","y")
-df06$x <- c("Urbano", "Rural")
+df06$x <- c("Nacional","Urbano", "Rural")
 write.table(sep = ";", quote = F , df06, "1_06.csv",row.names = FALSE)
   
 ########### 7 #################

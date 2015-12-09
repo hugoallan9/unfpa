@@ -204,13 +204,17 @@ levels(enei4$p03a05a) <- niveles
 
 
 ######################06##########################
-peaPlantel <- enei4 %>%
+dfpea_06 <- enei4 %>%
   select(pea, factor_expansion, ppa03, p03a02)%>%
   filter(pea == 1, ppa03 > 14)%>%
-  na.omit()%>%
+  #na.omit()%>%
   group_by(p03a02)%>%
   summarise(y = sum(factor_expansion)/as.numeric(pea4)*100)
 
+dfpea_06$p03a02 <- c("Si Asistió", "No asistió", "Ignorado" )
+
+names(dfpea_06) <- c("x","y")
+write.table(sep = ";", quote = F,  dfpea_06, "2_06.csv", row.names = FALSE)
 
 
 
