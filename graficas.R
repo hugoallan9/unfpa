@@ -62,3 +62,66 @@ g5<- graficaColCategorias(ENC$"2_05",etiquetasCategorias = "a",etiquetas = "h", 
 g6<- graficaAnillo(ENC$"2_06",
                    nombre = "graficas/pea/1_06.tex",
                    preambulo=FALSE)
+
+##########################Ocupados##########################
+g1<- graficaLinea(ENC$"3_01", rotar = "h", inicio=0)
+exportarLatex("graficas/ocupados/1_01.tex", g1)
+
+
+
+g2<- graficaBar(ENC$"3_02", ordenar=FALSE)
+g2 <- etiquetasBarras(g2)
+exportarLatex("graficas/ocupados/1_02.tex", g2)
+
+
+
+g3<- graficaBar(ENC$"3_03", ordenar=FALSE)
+g3 <- etiquetasBarras(g3)
+exportarLatex("graficas/ocupados/1_03.tex", g3)
+
+
+
+
+g4<- graficaCol(ENC$"3_04",ancho = .45, ordenar = FALSE)
+g4 <- etiquetasHorizontales(g4)
+exportarLatex("graficas/ocupados/1_04.tex", g4)
+
+
+g5<- graficaCol(ENC$"3_05",ancho = .45, ordenar = FALSE)
+g5 <- etiquetasHorizontales(g5)
+exportarLatex("graficas/ocupados/1_05.tex", g5)
+
+
+g6<- graficaCol(ENC$"3_06",ancho = .45, ordenar = FALSE)
+g6 <- etiquetasHorizontales(g6)
+exportarLatex("graficas/ocupados/1_06.tex", g6)
+
+g7<- graficaCol(ENC$"3_07",ancho = .45, ordenar = FALSE)
+g7 <- etiquetasHorizontales(g7)
+exportarLatex("graficas/ocupados/1_07.tex", g7)
+
+
+g8<- graficaCol(ENC$"3_08",ancho = .45, ordenar = FALSE)
+g8 <- etiquetasHorizontales(g8)
+exportarLatex("graficas/ocupados/1_08.tex", g8)
+
+
+g9<- graficaCol(ENC$"3_09",ancho = .45, ordenar = FALSE)
+g9 <- etiquetasHorizontales(g9)
+exportarLatex("graficas/ocupados/1_09.tex", g9)
+
+
+g10<- graficaColCategorias(ENC$"3_10",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,                            
+                           ruta = "graficas/ocupados/1_10.tex")
+
+
+
+
+# g11<- graficaLinea(ENC$"3_11", rotar = "h", inicio=0)
+# exportarLatex("graficas/ocupados/1_11.tex", g11)
+
+
+
+g12<- graficaCol(ENC$"3_12",ancho = .45, ordenar = FALSE)
+g12 <- etiquetasHorizontales(g12)
+exportarLatex("graficas/ocupados/1_12.tex", g12)
