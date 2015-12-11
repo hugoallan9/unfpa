@@ -354,9 +354,89 @@ write.table(sep = ";", quote = F , dfocu_08, "3_08.csv", row.names = FALSE)
 
 
 ################################09#######################
+na.zero <- function (x) {
+  x[is.na(x)] <- 0
+  return(x)
+}
 
+#p04c22, p04c23
 promedioSalario <- enei4%>%
   select(factor_expansion, p04c10, p03a05a)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
+
+totalPromedio <- enei3%>%
+  select(factor, p04c10, p03a05a)%>%
+  na.omit()%>%
+  summarise(y=weighted.mean(x = p04c10, w = factor))
+x = c("Total", as.numeric(totalPromedio))
+dfocu_09 <- data.frame(rbind(x, promedioSalario))
+
+
+names(dfocu_09) <- c("x","y")
+dfocu_09$x <- c("Total", "Ninguno", "Preprimaria", "Primaria","Básico", "Diversificado", "Superior", "Maestría","Doctorado")
+write.table(sep = ";", quote = F , dfocu_09, "3_09.csv", row.names = FALSE)
+
+############################10##########################
+na.zero <- function (x) {
+  x[is.na(x)] <- 0
+  return(x)
+}
+
+#p04c22, p04c23
+promedioSalarioHombre <- enei4%>%
+  select(factor_expansion, p04c10, p03a05a, ppa02)%>%
+  filter(ppa02 == "Hombre", p03a05a != "Doctorado")%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
+
+promedioSalarioMujer <- enei4%>%
+  select(factor_expansion, p04c10, p03a05a, ppa02)%>%
+  filter(ppa02 == "Mujer")%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
+
+totalPromedio <- enei3%>%
+  select(factor, p04c10, p03a05a, ppa02)%>%
+  na.omit()%>%
+  group_by(ppa02)%>%
+  summarise(y=weighted.mean(x = p04c10, w = factor))
+
+
+dfocu_10 <- data.frame(promedioSalarioHombre$p03a05a, promedioSalarioHombre$y, promedioSalarioMujer$y)
+dfocu_10 <- rbind(c("Total",totalPromedio$y),dfocu_10)
+
+names(dfocu_10) <- c("x","Hombre","Mujer")
+dfocu_10$x <- c("Total", "Ninguno", "Preprimaria", "Primaria","Básico", "Diversificado", "Superior", "Maestría")
+write.table(sep = ";", quote = F , dfocu_10, "3_10.csv", row.names = FALSE)
+
+
+####################12################################
+totalDesocupados <- enei4 %>%
+  select(desocupados, p03a05a,factor_expansion)%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion))
+
+educada <- enei4 %>%
+  select(p03a05a,factor_expansion)%>%
+  filter( ! (p03a05a %in%  c("Preprimaria", "Maestría", "Doctorado") ) )%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion))
+
+
+x = c()
+x = c("Total", sum(totalDesocupados$y)/sum(educada$y)*100)
+
+
+
+
+dfocu_12 <- data.frame(totalDesocupados$p03a05a, totalDesocupados$y/educada$y*100)
+dfocu_12 <- data.frame(rbind(x, dfocu_12))
+names(dfocu_12) <- c("x","y")
+dfocu_12$x <- c("Total", "Ninguno", "Primaria","Básico", "Diversificado", "Superior")
+write.table(sep = ";", quote = F , dfocu_12, "3_12.csv", row.names = FALSE)
