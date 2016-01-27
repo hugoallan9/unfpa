@@ -54,8 +54,29 @@ dfti_01 <- data.frame(makeYears(2014,2),x )
 names(dfti_01) <- c("x","y")
 write.table(sep = ";", quote = F,  dfti_01, "4_01.csv", row.names = FALSE)
 
+#################02##############################
+ninosSexo <- enei4 %>%
+  select(factor_expansion, ppa03, ppa02)%>%
+  filter(ppa03 <= 14, ppa03 > 6)%>%
+  na.omit()%>%
+  group_by(ppa02)%>%
+  summarise(y = sum(factor_expansion))
 
-##########################################02##############################################################
+trabajoInfatilSexo <- enei4 %>%
+  select(factor_expansion, ppa03, ppa02, pea)%>%
+  filter(ppa03 <= 14, ppa03 > 6, pea == 1)%>%
+  na.omit()%>%
+  group_by(ppa02)%>%
+  summarise(y = sum(factor_expansion))
+
+dfti_04 <- data.frame(ninosSexo$ppa02,trabajoInfatilSexo$y/ninosSexo$y*100)
+names(dfti_04) <- c("x", "y")
+
+write.table(sep = ";", quote = F,  dfti_04, "4_02.csv", row.names = FALSE)
+
+
+
+##########################################05##############################################################
 peaNino <- enei4 %>%
   select(pea, factor_expansion, ppa03, ppa02)%>%
   filter(pea == 1, ppa03 <= 14, ppa02 == "Hombre")%>%
@@ -92,11 +113,11 @@ tempMujer <- enei4%>%
 dfti_02 <- data.frame(tempHombre$p03a05a,tempHombre$y,tempMujer$y)
 names(dfti_02) <- c("x", "Hombre", "Mujer")
 
-write.table(sep = ";", quote = F,  dfti_02, "4_02.csv", row.names = FALSE)
+write.table(sep = ";", quote = F,  dfti_02, "4_05.csv", row.names = FALSE)
 levels(enei4$p03a05a) <- niveles
 
 
-##########################################02****##############################################################
+##########################################05****##############################################################
 niveles <- levels(enei4$p03a05a)
 levels(enei4$p03a05a) <- c(levels(enei4$p03a05a)[1:6], "Postgrado", "Postgrado")
 
@@ -135,7 +156,44 @@ names(dfti_03) <- c("x", "Hombre", "Mujer")
 write.table(sep = ";", quote = F,  dfti_03, "4_03.csv", row.names = FALSE)
 levels(enei4$p03a05a) <- niveles
 
+################################03#################################################
 
+ninosDominio <- enei4 %>%
+  select(ppa03, dominio, factor_expansion)%>%
+  filter(ppa03 <= 14, ppa03 > 6 )%>%
+  na.omit()%>%
+  group_by(dominio)%>%
+  summarise(y = sum(factor_expansion))
 
+trabajoInfantilDominio <- enei4 %>%
+  select(ppa03, dominio, factor_expansion, pea)%>%
+  filter(ppa03 <= 14, pea ==1)%>%
+  na.omit()%>%
+  group_by(dominio)%>%
+  summarise(y = sum(factor_expansion))
 
+dfti_04 <- data.frame(ninosDominio$dominio,trabajoInfantilDominio$y/ninosDominio$y*100)
+names(dfti_04) <- c("x", "y")
 
+write.table(sep = ";", quote = F,  dfti_04, "4_03.csv", row.names = FALSE)
+
+###########################04####################
+
+trabajoInfatilEducacion <- enei4 %>%
+  select(ppa03, p03a05a , factor_expansion, pea)%>%
+  filter(ppa03 <= 14, pea ==1)%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion))
+
+infantesEducacion <- enei4 %>%
+  select(ppa03, p03a05a , factor_expansion)%>%
+  filter(ppa03 <= 14, ppa03 > 6)%>%
+  na.omit()%>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion))
+
+dfti_04 <- data.frame(trabajoInfatilEducacion$p03a05a,trabajoInfatilEducacion$y/infantesEducacion$y[1:4]*100)
+names(dfti_04) <- c("x", "y")
+
+write.table(sep = ";", quote = F,  dfti_04, "4_04.csv", row.names = FALSE)
