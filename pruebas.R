@@ -363,8 +363,13 @@ names(df07) <- c('x','Hombre','Mujer')
 write.csv(df07, "1_07.csv",row.names = FALSE)
 
 
+tabla <- enei4 %>%
+  select(num_hogar, ppa03, pea) %>%
+  filter(ppa03 <= 14, ppa03 >6) %>%
+  na.omit()
 
-
-
-
+tablaJefe <- enei4 %>%
+  select(num_hogar, ppa05,p03a05a) %>%
+  filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?') %>%
+  
 
