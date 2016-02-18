@@ -370,6 +370,6 @@ tabla <- enei4 %>%
 
 tablaJefe <- enei4 %>%
   select(num_hogar, ppa05,p03a05a) %>%
-  filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?') %>%
+  filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?', p03a05a ==  'Diversificado') 
   
 
