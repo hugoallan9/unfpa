@@ -360,7 +360,6 @@ f2 <- c('Rural', rural$conteo/totalRural$conteo * 100)
 
 df07 <- data.frame(rbind(f1,f2)) 
 names(df07) <- c('x','Hombre','Mujer')
-write.csv(df07, "1_07.csv",row.names = FALSE)
 
 
 tabla <- enei4 %>%

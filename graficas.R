@@ -125,3 +125,32 @@ g10<- graficaColCategorias(ENC$"3_10",etiquetasCategorias = "a",etiquetas = "h",
 g12<- graficaCol(ENC$"3_12",ancho = .45, ordenar = FALSE)
 g12 <- etiquetasHorizontales(g12)
 exportarLatex("graficas/ocupados/1_12.tex", g12)
+
+
+################Trabajo infantila###################
+
+g1 <- graficaLinea(ENC$"4_01", rotar = "h", inicio=0)
+exportarLatex("graficas/TrabajoInfantil/1_01.tex", g1)
+
+g2 <- graficaCol(ENC$"4_02",ancho = .45, ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/TrabajoInfantil/1_02.tex", g2)
+
+
+g2 <- graficaCol(ENC$"4_03",ancho = .45, ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/TrabajoInfantil/1_03.tex", g2)
+
+
+g2 <- graficaCol(ENC$"4_04",ancho = .45, ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/TrabajoInfantil/1_04.tex", g2)
+
+
+g2<- graficaColCategorias(ENC$"4_05",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,                            
+                           ruta = "graficas/ocupados/1_05.tex")
+
+g2 <- graficaCol(ENC$"4_06",ancho = .45, ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/TrabajoInfantil/1_06.tex", g2)
+

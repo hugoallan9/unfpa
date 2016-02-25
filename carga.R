@@ -29,3 +29,12 @@ enei11 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/pesonas2011.sav",
 colnames(enei11) <- tolower(colnames(enei11))
 
 enei1 <- tbl_df(enei11)
+
+#ANIOS###
+makeYears <- function(year, longitud = 4){
+  anios <- c()
+  for (x in longitud:0){
+    anios <- c(anios,year - x) 
+  }
+  return(anios)
+}

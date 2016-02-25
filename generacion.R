@@ -1,14 +1,7 @@
 
 
 ########COMENZANDO A HACER LAS TABLAS#####################
-#ANIOS###
-makeYears <- function(year, longitud = 4){
-  anios <- c()
-  for (x in longitud:0){
-    anios <- c(anios,year - x) 
-  }
-  return(anios)
-}
+
 
 
 x = c()

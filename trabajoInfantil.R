@@ -164,7 +164,7 @@ ninosDominio <- enei4 %>%
   na.omit()%>%
   group_by(dominio)%>%
   summarise(y = sum(factor_expansion))
-
+  
 trabajoInfantilDominio <- enei4 %>%
   select(ppa03, dominio, factor_expansion, pea)%>%
   filter(ppa03 <= 14, pea ==1)%>%
@@ -197,3 +197,35 @@ dfti_04 <- data.frame(trabajoInfatilEducacion$p03a05a,trabajoInfatilEducacion$y/
 names(dfti_04) <- c("x", "y")
 
 write.table(sep = ";", quote = F,  dfti_04, "4_04.csv", row.names = FALSE)
+
+
+
+########################################06###########################################
+tabla <- enei4 %>%
+  select(num_hogar, ppa03, pea, factor_expansion) %>%
+  filter(ppa03 <= 14, ppa03 >6) %>%
+  na.omit()
+
+tablaJefe <- enei4 %>%
+  select(num_hogar, ppa05,p03a05a, factor_expansion) %>%
+  filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?') 
+
+tablaAux <- enei4 %>%
+  select(num_hogar, ppa03, pea, factor_expansion, p03a05a) %>%
+  filter(ppa03 <= 14, ppa03 >6, num_hogar %in% tablaJefe$num_hogar) %>%
+  na.omit() %>%
+  group_by(p03a05a)
+tablaAux <-  inner_join(tabla, tablaJefe)
+
+educacionJefe <- tablaAux %>%
+  group_by(p03a05a)%>%
+  summarise(y = sum(factor_expansion)/as.numeric(ninosTrabajadores)*100)
+
+names(educacionJefe) <- c("x", "y")
+educacionJefe$x <- addNA(educacionJefe$x)
+levels(educacionJefe$x)[9] <- "Desconocido"
+
+write.table(sep = ";", quote = F,  educacionJefe, "4_06.csv", row.names = FALSE)
+
+
+
