@@ -371,4 +371,13 @@ tablaJefe <- enei4 %>%
   select(num_hogar, ppa05,p03a05a) %>%
   filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?', p03a05a ==  'Diversificado') 
   
+proporcionGastoEdu <- consumo4 %>%
+  select(numhog, educa3, agreg3 , factor) %>%
+  na.omit()%>%
+  summarise(y = weighted.mean(educa3/agreg3, factor))
 
+
+
+gastoEducacion <- encoviPer14 %>%
+  select(numhog, p06a03b, p06a04b, p06a05b, p06a06b, p06a07b, p06a08b, p06a09b, p06b12b, p06b13b, p06b14b, p06b20b, p06b21b) %>%
+  group_by(numhog)
