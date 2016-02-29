@@ -5,15 +5,15 @@ x = c()
 
 
 ocupados <- enei1 %>%
-  select(ocupados, factor_exp)%>%
-  filter(ocupados == 1)%>%
+  select(ocupados, factor_exp, edad )%>%
+  filter(ocupados == 1, edad > 14)%>%
   na.omit()%>%
   count(wt = factor_exp)%>%
   as.numeric()
 
 primaria <- enei1 %>%
-  select(ocupados, po3a05a, factor_exp)%>%
-  filter(po3a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == 1)%>%
+  select(ocupados, po3a05a, factor_exp, edad )%>%
+  filter(po3a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == 1, edad > 14)%>%
   na.omit()%>%
   count(wt = factor_exp)%>%
   as.numeric()
@@ -22,15 +22,15 @@ x = c(x, as.numeric(primaria/ocupados*100))
 
 
 ocupados <- enei2 %>%
-  select(ocupados, factor)%>%
-  filter(ocupados == 1)%>%
+  select(ocupados, factor, ppa03)%>%
+  filter(ocupados == 1, ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor)%>%
   as.numeric()
 
 primaria <- enei2 %>%
-  select(ocupados, p03a03, factor)%>%
-  filter(p03a03 %in% c(NA,"Preprimaria", "Primaria" ), ocupados == 1)%>%
+  select(ocupados, p03a03, factor, ppa03)%>%
+  filter(p03a03 %in% c(NA,"Preprimaria", "Primaria" ), ocupados == 1, ppa03 > 14)%>%
   count(wt = factor)%>%
   as.numeric()
 
@@ -38,15 +38,15 @@ x = c(x, as.numeric(primaria/ocupados*100))
 
 
 ocupados <- enei3 %>%
-  select(ocupados, factor)%>%
-  filter(ocupados == 1)%>%
+  select(ocupados, factor, ppa03)%>%
+  filter(ocupados == 1, ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor)%>%
   as.numeric()
 
 primaria <- enei3 %>%
-  select(ocupados, p03a05a, factor)%>%
-  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == 1)%>%
+  select(ocupados, p03a05a, factor, ppa03)%>%
+  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == 1,  ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor)%>%
   as.numeric()
@@ -55,15 +55,15 @@ x = c(x, as.numeric(primaria/ocupados*100))
 
 
 ocupados <- enei4 %>%
-  select(ocupados, factor_expansion)%>%
-  filter(ocupados == "Población ocupada")%>%
+  select(ocupados, factor_expansion, ppa03)%>%
+  filter(ocupados == "Población ocupada", ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)%>%
   as.numeric()
 
 primaria <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion)%>%
-  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada")%>%
+  select(ocupados, p03a05a, factor_expansion, ppa03)%>%
+  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada", ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)%>%
   as.numeric()
@@ -78,62 +78,62 @@ write.table(sep = ";", quote = F , dfocu_01, "3_01.csv", row.names = FALSE)
 x = c()
 abreviatura <- levels(enei4$p04c04b_1d)
 agricultura <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[1])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[1], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 industriales <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[2])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[2], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 construccion <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[3])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[3], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 comercio <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[4])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[4], ppa03>14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 infoComunicaciones <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[5])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03 )%>%
+  filter(p04c04b_1d == abreviatura[5], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 financieras <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[6])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[6], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 inmobiliarias <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[7])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[7], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 profesionales <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[8])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[8], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 publica <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[9])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[9], ppa03>14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 otras <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p04c04b_1d == abreviatura[10])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p04c04b_1d == abreviatura[10], ppa03 >14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
@@ -142,8 +142,8 @@ x = c(agricultura,industriales, construccion, comercio,
       publica, otras)
 
 dfocu_02 <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c04b_1d)%>%
-  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada")%>%
+  select(ocupados, p03a05a, factor_expansion, p04c04b_1d, ppa03)%>%
+  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p04c04b_1d)%>%
   summarise(y = sum(factor_expansion))
@@ -159,56 +159,56 @@ abreviatura <- levels(enei4$p04c02b_1d)
 militares<- 0
 
 gerentes <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[2])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[2], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 cientificos<- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[3])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[3], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 tecnicos <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[4])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[4], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 administrativo <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[5])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[5], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 vendedores <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[6])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03 )%>%
+  filter(p04c02b_1d == abreviatura[6], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 agricultores <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[7])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[7], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 artesanos <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[8])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[8], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 operarios <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[9])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[9], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
 elementales <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p04c02b_1d == abreviatura[10])%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p04c02b_1d == abreviatura[10], ppa03 > 14)%>%
   na.omit()%>%
   count(wt = factor_expansion)
 
@@ -216,8 +216,8 @@ x = c(gerentes, cientificos, tecnicos, administrativo, vendedores, agricultores,
       artesanos, operarios, elementales)
 
 dfocu_03 <- enei4 %>%
-  select(ocupados, p03a05a, factor_expansion, p04c02b_1d)%>%
-  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada")%>%
+  select(ocupados, p03a05a, factor_expansion, p04c02b_1d, ppa03)%>%
+  filter(p03a05a %in% c("Ninguno", "Preprimaria", "Primaria" ), ocupados == "Población ocupada", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p04c02b_1d)%>%
   summarise(y = sum(factor_expansion))
@@ -239,8 +239,8 @@ totalIgss <- enei4 %>%
 x = c()
 x = c("Total", as.numeric(sum(totalIgss$y)/ocupados*100))
 ocupadaEducada <- enei4 %>%
-  select(ocupados, p03a05a,factor_expansion)%>%
-  filter(p03a05a != "Preprimaria")%>%
+  select(ocupados, p03a05a,factor_expansion, ppa03)%>%
+  filter(p03a05a != "Preprimaria", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -255,8 +255,8 @@ write.table(sep = ";", quote = F , dfocu_04, "3_04.csv", row.names = FALSE)
 
 ########################05#############################################
 totalInformal <- enei4 %>%
-  select(ocupados, p03a05a, formal_informal ,factor_expansion)%>%
-  filter(formal_informal == "INFORMAL")%>%
+  select(ocupados, p03a05a, formal_informal ,factor_expansion, ppa03)%>%
+  filter(formal_informal == "INFORMAL", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -265,8 +265,8 @@ x = c()
 x = c("Total", sum(totalInformal$y)/ocupados*100)
 
 ocupadaInformal <- enei4 %>%
-  select(ocupados, p03a05a,factor_expansion, formal_informal)%>%
-  filter(p03a05a != "Doctorado")%>%
+  select(ocupados, p03a05a,factor_expansion, formal_informal, ppa03)%>%
+  filter(p03a05a != "Doctorado", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -289,8 +289,8 @@ asalariada <- enei4%>%
   summarise(y = sum(factor_expansion))
 
 contratada <- enei4%>%
-  select(p04c06, factor_expansion, p03a05a, p04c07)%>%
-  filter(p04c06 %in% abre[1:4], p04c07 == "Si")%>%
+  select(ocupados, p04c06, factor_expansion, p03a05a, p04c07, ppa03)%>%
+  filter(p04c06 %in% abre[1:4], p04c07 == "Si", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -314,8 +314,8 @@ asalariada <- enei4%>%
   summarise(y = sum(factor_expansion))
 
 aguinaldo <- enei4%>%
-  select(p04c06, factor_expansion, p03a05a, p04c14a)%>%
-  filter(p04c06 %in% abre[1:4], p04c14a == "Si")%>%
+  select(ocupados,p04c06, factor_expansion, p03a05a, p04c14a, ppa03)%>%
+  filter(p04c06 %in% abre[1:4], p04c14a == "Si", ppa03 > 14, ocupados)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -331,15 +331,15 @@ write.table(sep = ";", quote = F , dfocu_07, "3_07.csv", row.names = FALSE)
 ########################08#######################
 abre <- levels(enei4$p04c06)
 asalariada <- enei4%>%
-  select(p04c06, factor_expansion, p03a05a)%>%
-  filter(p04c06 %in% abre[1:4])%>%
+  select(p04c06, factor_expansion, p03a05a, ppa03)%>%
+  filter(p04c06 %in% abre[1:4], ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
 
 aguinaldo <- enei4%>%
-  select(p04c06, factor_expansion, p03a05a, p04c15a)%>%
-  filter(p04c06 %in% abre[1:4], p04c15a == "Si")%>%
+  select(p04c06, factor_expansion, p03a05a, p04c15a, ppa03)%>%
+  filter(p04c06 %in% abre[1:4], p04c15a == "Si", ppa03)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))
@@ -361,13 +361,15 @@ na.zero <- function (x) {
 
 #p04c22, p04c23
 promedioSalario <- enei4%>%
-  select(factor_expansion, p04c10, p03a05a)%>%
+  select(ocupados, factor_expansion, p04c10, p03a05a, ppa03)%>%
+  filter(ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
 
 totalPromedio <- enei3%>%
-  select(factor, p04c10, p03a05a)%>%
+  select(ocupados, factor, p04c10, p03a05a, ppa03)%>%
+  filter(ppa03 > 14) %>%
   na.omit()%>%
   summarise(y=weighted.mean(x = p04c10, w = factor))
 x = c("Total", as.numeric(totalPromedio))
@@ -386,21 +388,22 @@ na.zero <- function (x) {
 
 #p04c22, p04c23
 promedioSalarioHombre <- enei4%>%
-  select(factor_expansion, p04c10, p03a05a, ppa02)%>%
-  filter(ppa02 == "Hombre", p03a05a != "Doctorado")%>%
+  select(ocupados, factor_expansion, p04c10, p03a05a, ppa02, ppa03)%>%
+  filter(ppa02 == "Hombre", p03a05a != "Doctorado", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
 
 promedioSalarioMujer <- enei4%>%
-  select(factor_expansion, p04c10, p03a05a, ppa02)%>%
-  filter(ppa02 == "Mujer")%>%
+  select(ocupados, factor_expansion, p04c10, p03a05a, ppa02, ppa03)%>%
+  filter(ppa02 == "Mujer", ppa03 > 14)%>%
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y=weighted.mean(x = p04c10, w = factor_expansion))
 
 totalPromedio <- enei3%>%
-  select(factor, p04c10, p03a05a, ppa02)%>%
+  select(ocupados, factor, p04c10, p03a05a, ppa02, ppa03)%>%
+  filter(ppa03 > 14 ) %>%
   na.omit()%>%
   group_by(ppa02)%>%
   summarise(y=weighted.mean(x = p04c10, w = factor))
@@ -416,7 +419,8 @@ write.table(sep = ";", quote = F , dfocu_10, "3_10.csv", row.names = FALSE)
 
 ####################12################################
 totalDesocupados <- enei4 %>%
-  select(desocupados, p03a05a,factor_expansion)%>%
+  select(desocupados, p03a05a,factor_expansion, ppa03)%>%
+  filter(ppa03 > 14 )
   na.omit()%>%
   group_by(p03a05a)%>%
   summarise(y = sum(factor_expansion))

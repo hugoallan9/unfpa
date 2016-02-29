@@ -372,12 +372,147 @@ tablaJefe <- enei4 %>%
   filter(num_hogar %in% tabla$num_hogar, ppa05 == 'Jefe(a) del hogar?', p03a05a ==  'Diversificado') 
   
 proporcionGastoEdu <- consumo4 %>%
-  select(numhog, educa3, agreg3 , factor) %>%
+  select(numhog, educa3, agreg3 , factor3) %>%
   na.omit()%>%
-  summarise(y = weighted.mean(educa3/agreg3, factor))
+  summarise(y = weighted.mean(educa3/agreg3, factor3))
 
+gastoEducacion <- encoviPer14 %>%
+  select(numhog, thogar, factor, p06a03b, p06a04b, p06a05b, p06a06b, p06a07b, p06a08b, p06a09b, p06b12b, p06b13b, p06b14b, p06b20b, p06b21b) %>%
+  group_by(numhog) %>%
+  mutate(gastoEdu = ( sum(p06a03b, p06a04b, p06a05b, 
+                          p06a06b, p06a07b, p06a08b, 
+                          p06a09b, p06b12b, p06b13b, 
+                          p06b14b, p06b20b, p06b21b,
+                          na.rm = TRUE) ) ) 
 
 
 gastoEducacion <- encoviPer14 %>%
-  select(numhog, p06a03b, p06a04b, p06a05b, p06a06b, p06a07b, p06a08b, p06a09b, p06b12b, p06b13b, p06b14b, p06b20b, p06b21b) %>%
-  group_by(numhog)
+  select(numhog, thogar, factor, p06a03b, p06a04b, p06a05b, p06a06b, p06a07b, p06a08b, p06a09b, p06b12b, p06b13b, p06b14b, p06b18b, p06b19b, p06b20b, p06b21b) %>%
+  group_by(numhog) %>%
+  mutate(gastoEdu = ( sum(p06a03b, p06a04b, p06a05b, 
+                          10*p06a06b, 10*p06a07b, 10*p06a08b, 
+                          p06a09b, p06b12b, p06b13b, 
+                           p06b14b,10*p06b18b, 10*p06b19b,
+                          10*p06b20b, p06b21b,
+                          na.rm = TRUE) ) )
+
+promedioGasto <- gastoEducacion %>%
+  group_by(numhog, factor3) %>%
+  summarise(y = sum(gastoEdu/thogar))
+
+
+gastoEducacioHogares <- consumo4 %>%
+  select(educa3, factor3) %>%
+  summarise(y = weighted.mean(educa3, factor3) )
+
+
+promedioGastoTotal <- consumo4 %>%
+  select(agreg3, factor3) %>%
+  summarise(y = weighted.mean(agreg3, factor3) )
+
+proporcionGastoEdu <- gastoEducacioHogares/promedioGastoTotal * 100
+
+
+
+reduccionGenero <- encoviPer14 %>%
+  select(numhog, ppa02, ppa05) %>%
+  filter(ppa05 == 'JEFE DEL HOGAR')
+
+reduccionGeneroGasto <- inner_join(consumo4, reduccionGenero)
+
+promedioEduGenero <- reduccionGeneroGasto %>%
+  group_by(ppa02) %>%
+  summarise(y = weighted.mean(educa3/agreg3, factor3)*100)
+
+promedioGastoGenero <- reduccionGeneroGasto %>%
+  group_by(ppa02) %>%
+  summarise(y = weighted.mean(agreg3, factor3))
+
+promedioEduAgre <- promedioEduGenero$y / promedioGastoGenero$y * 100
+
+
+reduccionEtnia <- encoviPer14 %>%
+  select(numhog, factor, p04a11a, ppa05) %>%
+  filter(ppa05 == 'JEFE DEL HOGAR')
+
+
+
+
+reduccionEtniaGasto <- inner_join(consumo4, reduccionEtnia)
+
+levels(reduccionEtniaGasto$p04a11a) <- plyr::mapvalues(reduccionEtniaGasto$p04a11a, from = c("K´iche´" ,
+                                           "Q´eqchi´" , 
+                                           "Kaqchiquel" ,
+                                           "Mam", 
+                                           " Q´anjob´al",
+                                           "Achi", 
+                                           "Ixil",
+                                           "Poqomchi´",
+                                           "Chuj",
+                                           "Awateko",
+                                           "Pokoman",
+                                           "Ch´orti ",
+                                           "Jakalteko (popti)",
+                                           "Mopan",
+                                           "Uspanteko",
+                                           " Tz´utujil ",
+                                           "Chalchiteko",
+                                           "Akateko" , 
+                                           "Xinka",
+                                           "Garifuna", 
+                                           "Ladino",
+                                           "Extranjero"), 
+          to =  c(
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "Indígena",
+            "No indígena",
+            "No indígena"))
+
+
+promedioEtnia <- reduccionEtniaGasto %>%
+  group_by(p04a11a) %>%
+  summarise(y  = weighted.mean(educa3,factor3) )
+
+promedioGastoEtnia <- reduccionEtniaGasto %>%
+  group_by(p04a11a) %>%
+  summarise(y = weighted.mean(agreg3, factor))
+
+promedioEtniaAgre <- promedioEtnia$y / promedioGastoEtnia$y * 100
+
+
+promedioPobreza <- consumo4 %>%
+  select(educa3, factor3, pobreza) %>%
+  group_by(pobreza)%>%
+  summarise(y = weighted.mean(educa3, factor3))
+
+
+
+promedioResidencia <- consumo4 %>%
+  select(educa3, factor3, area) %>%
+  group_by(area)%>%
+  summarise(y = weighted.mean(educa3, factor3))
+
+
+promedioDepto <- consumo4 %>%
+  select(educa3, factor, depto) %>%
+  group_by(depto)%>%
+  summarise(y = weighted.mean(educa3, factor))
+

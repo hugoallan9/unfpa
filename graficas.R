@@ -69,13 +69,13 @@ exportarLatex("graficas/ocupados/1_01.tex", g1)
 
 
 
-g2<- graficaBar(ENC$"3_02", ordenar=FALSE)
+g2<- graficaBar(ENC$"3_02", ordenar=T)
 g2 <- etiquetasBarras(g2)
 exportarLatex("graficas/ocupados/1_02.tex", g2)
 
 
 
-g3<- graficaBar(ENC$"3_03", ordenar=FALSE)
+g3<- graficaBar(ENC$"3_03", ordenar=T)
 g3 <- etiquetasBarras(g3)
 exportarLatex("graficas/ocupados/1_03.tex", g3)
 
@@ -132,25 +132,51 @@ exportarLatex("graficas/ocupados/1_12.tex", g12)
 g1 <- graficaLinea(ENC$"4_01", rotar = "h", inicio=0)
 exportarLatex("graficas/TrabajoInfantil/1_01.tex", g1)
 
-g2 <- graficaCol(ENC$"4_02",ancho = .45, ordenar = FALSE)
+g2 <- graficaCol(ENC$"4_02", ancho = 0.2, ordenar = FALSE)
 g2 <- etiquetasHorizontales(g2)
 exportarLatex("graficas/TrabajoInfantil/1_02.tex", g2)
 
 
-g2 <- graficaCol(ENC$"4_03",ancho = .45, ordenar = FALSE)
+g2 <- graficaCol(ENC$"4_03", ordenar = FALSE)
 g2 <- etiquetasHorizontales(g2)
 exportarLatex("graficas/TrabajoInfantil/1_03.tex", g2)
 
 
-g2 <- graficaCol(ENC$"4_04",ancho = .45, ordenar = FALSE)
+g2 <- graficaCol(ENC$"4_04", ordenar = FALSE)
 g2 <- etiquetasHorizontales(g2)
 exportarLatex("graficas/TrabajoInfantil/1_04.tex", g2)
 
 
 g2<- graficaColCategorias(ENC$"4_05",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,                            
-                           ruta = "graficas/ocupados/1_05.tex")
+                           ruta = "graficas/TrabajoInfantil/1_05.tex")
 
-g2 <- graficaCol(ENC$"4_06",ancho = .45, ordenar = FALSE)
+g2 <- graficaCol(ENC$"4_06", ordenar = FALSE)
 g2 <- etiquetasHorizontales(g2)
 exportarLatex("graficas/TrabajoInfantil/1_06.tex", g2)
+
+####################Gasto Hogares ####################
+g1 <- graficaLinea(ENC$"5_01", rotar = "h", inicio=0)
+exportarLatex("graficas/GastoHogares/1_01.tex", g1)
+
+g1 <- graficaLinea(ENC$"5_02", rotar = "h", inicio=0)
+exportarLatex("graficas/GastoHogares/1_02.tex", g1)
+
+
+g2<- graficaColCategorias(ENC$"5_03",etiquetasCategorias = "a",etiquetas = "h", ancho=0.65,                            
+                          ruta = "graficas/GastoHogares/1_03.tex")
+
+g2 <- graficaCol(ENC$"5_04", ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/GastoHogares/1_04.tex", g2)
+
+
+g2 <- graficaCol(ENC$"5_05", ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/GastoHogares/1_05.tex", g2)
+
+
+g2 <- graficaCol(ENC$"5_06", ordenar = FALSE)
+g2 <- etiquetasHorizontales(g2)
+exportarLatex("graficas/GastoHogares/1_06.tex", g2)
+
 
