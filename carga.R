@@ -5,6 +5,13 @@ library(survey)
 library(xlsx)
 library(xlsxjars)
 setwd('/mnt/datos/GitHub/unfpa/')
+
+enei15 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/personas2015.sav", 
+                    use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+colnames(enei15) <- tolower(colnames(enei15))
+
+enei5 <- tbl_df(enei15)
+
 enei14 <- read.spss("/mnt/datos/GitHub/unfpa/Bases/personas2014.sav", 
                     use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
 colnames(enei14) <- tolower(colnames(enei14))
